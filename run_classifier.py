@@ -22,6 +22,10 @@ def main(args: argparse.Namespace) -> None:
         else:
             print(results[:results.find('\n')])
 
+    if args.predict_headline:
+        df = pd.DataFrame({'text_a': args.predict_headline, 'text_b': args.predict_body}, index=[0])
+        print(classifier.predict(df))
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -42,6 +46,11 @@ if __name__ == '__main__':
     parser.add_argument('--do_eval', action='store_true',
                         help='Whether to evaluate the model')
 
+    parser.add_argument('--predict_headline', type=str,
+                        help='An article headline to make a single prediction from')
+    parser.add_argument('--predict_body', type=str,
+                        help='An article body to make a single prediction from')
+
     parser.add_argument('--disp_metrics', action='store_true',
                         help='Whether to display metrics (if set '
                              'to False, only F1 macro is displayed)')
@@ -49,5 +58,8 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=str, default=42,
                         help='Random seed')
     args = parser.parse_args()
+    assert bool(args.predict_headline) == bool(args.predict_body), 'For making a single prediction both ' \
+                                                                   '--predict_headline and --predict_body' \
+                                                                   'are required'
 
     main(args)
