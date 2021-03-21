@@ -52,9 +52,8 @@ class TestClassifier(unittest.TestCase):
 
     def test_single_prediction(self):
         predictions = self.classifier.predict(DATAFRAME)
-        self.assertEqual(len(predictions), 1)
-        self.assertIsInstance(predictions[0], str)
-        self.assertEqual(predictions[0], 'unrelated')
+        self.assertIsInstance(predictions, str)
+        self.assertEqual(predictions, 'unrelated')
 
 
 if __name__ == '__main__':
