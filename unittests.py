@@ -24,7 +24,7 @@ class TestClassifier(unittest.TestCase):
 
         self.df_columns = ['id', 'text_b', 'text_a', 'labels']
 
-        self.classifier = FakeNewsClassifier()
+        self.classifier = FakeNewsClassifier(use_cuda=False)
 
     def assert_valid_df(self, df):
         self.assertIsInstance(df, pd.DataFrame)

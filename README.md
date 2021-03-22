@@ -45,7 +45,8 @@ Arguments:
 * `--predict_headline` - an article headline to make a single prediction from (must be used with `--predict_body`)
 * `--predict_body` - an article body to make a single prediction from (must be used with `--predict_headline`)
 * `--disp_metrics` - a flag for displaying metrics (if set to False, only F1 macro is displayed)
-
+* `--disp_metrics` - a flag for displaying metrics (if set to False, only F1 macro is displayed)
+* `--use_cuda` - a flag for using CUDA GPU for training/evaluation
 Example run:
 ```shell
 python run_classifier.py --do_train --evaluate_during_training --do_eval --disp_metrics

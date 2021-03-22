@@ -11,7 +11,7 @@ def main(args: argparse.Namespace) -> None:
     dev_df = pd.read_csv(os.path.join(args.data_dir, args.dev_file))
     test_df = pd.read_csv(os.path.join(args.data_dir, args.test_file))
 
-    classifier = FakeNewsClassifier()
+    classifier = FakeNewsClassifier(use_cuda=args.use_cuda)
     if args.do_train:
         classifier.finetune(train_df=train_df, dev_df=dev_df,
                             evaluate_during_training=args.evaluate_during_training)
@@ -55,8 +55,8 @@ if __name__ == '__main__':
                         help='Whether to display metrics (if set '
                              'to False, only F1 macro is displayed)')
 
-    parser.add_argument('--seed', type=str, default=42,
-                        help='Random seed')
+    parser.add_argument('--use_cuda', action='store_true',
+                        help='Whether to use GPU for training/evaluation')
     args = parser.parse_args()
     assert bool(args.predict_headline) == bool(args.predict_body), 'For making a single prediction both ' \
                                                                    '--predict_headline and --predict_body' \

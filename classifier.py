@@ -20,8 +20,10 @@ DEFAULT_ARGS = {
 
 
 class FakeNewsClassifier:
-    def __init__(self, model_type: str = 'bert', model_name: str = 'bert-base-uncased') -> None:
-        self.model = ClassificationModel(model_type, model_name, num_labels=4, args=DEFAULT_ARGS, use_cuda=False)
+    def __init__(self, model_type: str = 'bert', model_name: str = 'bert-base-uncased',
+                 use_cuda: bool = False) -> None:
+        self.model = ClassificationModel(model_type, model_name, num_labels=4,
+                                         args=DEFAULT_ARGS, use_cuda=use_cuda)
 
     def finetune(self, train_df: pd.DataFrame, dev_df: pd.DataFrame = None,
                  evaluate_during_training: bool = False) -> None:
